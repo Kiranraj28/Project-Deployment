@@ -35,4 +35,3 @@ if st.button("Predict Activity"):
 
     label = "Running" if prediction == 1 else "Walking"
     st.success(f"Predicted Activity: {label}")
-
