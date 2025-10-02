@@ -58,9 +58,9 @@ The objective of this project is to analyze employee data and develop a predicti
 # Load scaler & model
 @st.cache_resource
 def load_model_scaler():
-    with open("Employe_performance_Scaler.pkl", "rb") as scaler_file:
+    with open("Employe Performance/Employe_performance_Scaler.pkl", "rb") as scaler_file:
         scaler = pickle.load(scaler_file)
-    with open("Employe_performance_trained_model.pkl", "rb") as model_file:
+    with open("Employe Performance/Employe_performance_trained_model.pkl", "rb") as model_file:
         model = pickle.load(model_file)
     return model, scaler
 
