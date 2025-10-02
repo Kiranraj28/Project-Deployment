@@ -10,6 +10,11 @@ import streamlit as st
 import pandas as pd
 import pickle
 
+st.set_page_config(
+    page_title="Employee Performance Predictor",
+    page_icon="🚶",  # Walking emoji
+)
+
 # Sidebar with project summary
 st.sidebar.title("Project Summary")
 
