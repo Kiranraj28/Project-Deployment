@@ -9,7 +9,7 @@ import pickle
 import numpy as np
 
 # Load the saved pipeline/model (assumed to include scaling if used)
-with open('Walk or Run Classification/dep_pipeline.pkl', 'rb') as file:
+with open('dep_pipeline.pkl', 'rb') as file:
     model = pickle.load(file)
 
 st.title("Activity Prediction: Walk or Run")
