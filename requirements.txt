@@ -1,0 +1,5 @@
+streamlit==1.6.1
+scikit-learn==2.3.2
+numpy==2.3.3
+pandas==1.45.1
+joblib  # <-- MUST BE ADDED
