@@ -9,8 +9,7 @@ import pickle
 import numpy as np
 
 # Load the saved pipeline/model (assumed to include scaling if used)
-with open('../dep_pipeline1.pkl', 'rb') as f:
-    model = pickle.load(f)
+model = joblib.load('dep_pipeline1.pkl')
 
 st.title("Activity Prediction: Walk or Run")
 
