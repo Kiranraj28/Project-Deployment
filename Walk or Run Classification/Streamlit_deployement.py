@@ -5,7 +5,7 @@
 
 
 import streamlit as st
-import pickle
+import joblib
 import numpy as np
 
 # Load the saved pipeline/model (assumed to include scaling if used)
