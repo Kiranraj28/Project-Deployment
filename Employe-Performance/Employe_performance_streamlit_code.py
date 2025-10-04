@@ -69,7 +69,7 @@ def load_model_scaler():
     # and the file paths must be correct relative to the repository root.
     
     # Define the base directory (assuming this is correct from previous context)
-    base_path = "Employe Performance/" 
+    base_path = "Employe-Performance/" 
 
     # Load Scaler saved with Joblib
     scaler_path = base_path + "Employe_performance_Scaler1.pkl"
