@@ -101,7 +101,7 @@ freq_encode_maps = {
     "Attrition": {'No':0.852,'Yes':0.148}
 }
 
-st.title("Employee Performance Rating Prediction")
+st.title("Employee Performance Rating Prediction 📊")
 
 # Numeric inputs
 age = st.number_input("Age", 18, 65)
