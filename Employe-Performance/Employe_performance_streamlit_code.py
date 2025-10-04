@@ -12,7 +12,8 @@ import joblib
 
 import streamlit as st
 st.set_page_config(
-    page_title="ML-Powered Employee Performance Predictor 🤖",
+    page_title="ML-Powered Employee Performance Predictor 📊",
+    page_icon="🤖",
     layout="wide"  
 )
 
