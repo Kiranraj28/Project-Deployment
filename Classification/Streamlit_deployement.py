@@ -8,6 +8,8 @@ import streamlit as st
 import pickle
 import numpy as np
 
+st.set_page_config(page_title="Walk and Run", page_icon="🏃")
+
 # Sidebar Information Section
 st.sidebar.title("Feature Information 🧠")
 
