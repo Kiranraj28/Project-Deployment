@@ -8,7 +8,7 @@
 
 import streamlit as st
 import pandas as pd
-import pickle
+import joblib # <--- ADD THIS IMPORT
 
 # Sidebar with project summary
 st.sidebar.title("Project Summary")
@@ -55,13 +55,30 @@ The objective of this project is to analyze employee data and develop a predicti
 - Actionable business recommendations
 """)
 
+
+
+import streamlit as st
+import joblib # <--- ADD THIS IMPORT
+# import pickle # <--- REMOVE OR COMMENT OUT THIS IMPORT
+
 # Load scaler & model
 @st.cache_resource
 def load_model_scaler():
-    with open("Employe_performance_Scaler.pkl", "rb") as scaler_file:
-        scaler = pickle.load(scaler_file)
-    with open("Employe_performance_trained_model.pkl", "rb") as model_file:
-        model = pickle.load(model_file)
+    # Use the joblib library to load the models
+    # NOTE: The file names MUST match the new names (e.g., 'Scaler1.pkl')
+    # and the file paths must be correct relative to the repository root.
+    
+    # Define the base directory (assuming this is correct from previous context)
+    base_path = "Employe Performance/" 
+
+    # Load Scaler saved with Joblib
+    scaler_path = base_path + "Employe_performance_Scaler1.pkl"
+    scaler = joblib.load(scaler_path)
+
+    # Load Model saved with Joblib
+    model_path = base_path + "Employe_performance_trained_model1.pkl"
+    model = joblib.load(model_path)
+    
     return model, scaler
 
 loaded_model, loaded_scaler = load_model_scaler()
