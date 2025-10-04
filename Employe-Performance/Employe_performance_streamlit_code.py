@@ -8,7 +8,14 @@
 
 import streamlit as st
 import pandas as pd
-import joblib # <--- ADD THIS IMPORT
+import joblib 
+
+import streamlit as st
+st.set_page_config(
+    page_title="ML-Powered Employee Performance Predictor 🤖",
+    layout="wide"  
+)
+
 
 # Sidebar with project summary
 st.sidebar.title("Project Summary")
