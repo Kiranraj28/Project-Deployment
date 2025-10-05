@@ -10,20 +10,7 @@ import numpy as np
 # ------------------------------
 # 1. Load Model
 # ------------------------------
-import os
-import streamlit as st
-import tensorflow as tf
-
-@st.cache_resource
-def load_model():
-    model_path = os.path.join(os.path.dirname(__file__), "rice_leaf_classifier_final.keras")
-    st.write(f"🔍 Loading model from: {model_path}")
-    if not os.path.exists(model_path):
-        st.error(f"Model file not found at: {model_path}")
-        raise FileNotFoundError("rice_leaf_classifier_final.keras not found.")
-    return tf.keras.models.load_model(model_path)
-
-model = load_model()
+model = tf.keras.models.load_model("rice_leaf_classifier_final.keras")
 
 # ------------------------------
 # 2. Class Names
