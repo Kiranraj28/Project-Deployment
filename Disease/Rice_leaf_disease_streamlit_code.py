@@ -13,7 +13,7 @@ from PIL import Image
 
 @st.cache_resource
 def load_model():
-    return keras.models.load_model("./Disease/best_model.keras")
+    return tf.keras.models.load_model("./Disease/best_model.keras")
 
 
 model = load_model()
