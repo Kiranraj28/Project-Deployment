@@ -17,12 +17,13 @@ def load_model():
         base_model,
         tf.keras.layers.GlobalAveragePooling2D(),
         tf.keras.layers.Dense(128, activation='relu'),
-        tf.keras.layers.Dropout(0.3),
+        tf.keras.layers.Dropout(0.5),
         tf.keras.layers.Dense(3, activation='softmax')
     ])
     saved_model = tf.keras.models.load_model("best_model.keras", compile=False, safe_mode=False)
     model.set_weights(saved_model.get_weights())
     return model
+
 model = load_model()
 CLASS_NAMES = ['Bacterial leaf blight', 'Brown spot', 'Leaf smut'] # adjust names as per your classes
 
