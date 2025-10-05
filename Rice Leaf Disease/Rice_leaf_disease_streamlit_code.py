@@ -49,8 +49,15 @@ import streamlit as st
 
 @st.cache_resource
 def load_model():
-    # ✅ Point to your .h5 model file
-    model_path = Path(__file__).parent / "Rice Leaf Disease" / "best_model.h5"
+    # 👇 both files are in the same folder, so direct reference is enough
+    model_path = Path(__file__).parent / "best_model.h5"
+
+    # optional check for debugging
+    if not model_path.exists():
+        st.error(f"❌ Model file not found at: {model_path}")
+    else:
+        st.success(f"✅ Model found at: {model_path}")
+
     return tf.keras.models.load_model(str(model_path), compile=False)
 
 
