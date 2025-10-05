@@ -55,19 +55,26 @@ def load_model():
         return None
 
     try:
-        model = tf.keras.models.load_model(
-            str(model_path),
-            compile=False,
-            custom_objects={
-                'KerasLayer': tf.keras.layers.Layer  # only needed if TF Hub was used
-            }
+        # 🔹 rebuild architecture manually
+        base_model = tf.keras.applications.MobileNetV2(
+            input_shape=(224, 224, 3),
+            include_top=False,
+            weights=None
         )
+        x = tf.keras.layers.GlobalAveragePooling2D()(base_model.output)
+        output = tf.keras.layers.Dense(3, activation='softmax')(x)  # 3 classes
+        model = tf.keras.models.Model(inputs=base_model.input, outputs=output)
+
+        # 🔹 load weights only
+        model.load_weights(str(model_path))
+
         st.success("✅ Model loaded successfully")
         return model
 
     except Exception as e:
         st.error(f"⚠️ Error loading model: {e}")
         return None
+
 
 
 
