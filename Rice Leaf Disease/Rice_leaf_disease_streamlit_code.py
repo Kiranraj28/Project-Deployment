@@ -45,7 +45,7 @@ The confidence score expresses how certain the model is about its prediction, ra
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("Rice Leaf Disease/best_model.h5")
+    return tf.keras.models.load_model("best_model.h5")
 
 model = load_model()
 CLASS_NAMES = ['Bacterial leaf blight', 'Brown spot', 'Leaf smut'] # adjust names as per your classes
