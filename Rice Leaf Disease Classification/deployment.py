@@ -1,44 +1,59 @@
 # ==============================
-# Streamlit App for Rice Leaf Disease Prediction
+# 🌾 Rice Leaf Disease Prediction App
 # ==============================
 
 import streamlit as st
 import tensorflow as tf
-from tensorflow.keras.utils import load_img, img_to_array
 import numpy as np
+from PIL import Image
+import os
 
 # ------------------------------
-# 1. Load Model
+# 1. Load Model (cached)
 # ------------------------------
-model = tf.keras.models.load_model("rice_leaf_classifier_final.keras")
+@st.cache_resource
+def load_model():
+    model_path = os.path.join(os.path.dirname(__file__), "rice_leaf_classifier_clean2.keras")
+    model = tf.keras.models.load_model(model_path, compile=False)
+    return model
+
+model = load_model()
 
 # ------------------------------
-# 2. Class Names
+# 2. Class Names (based on your training)
 # ------------------------------
-class_names = ['Bacterial leaf blight', 'Brown spot', 'Leaf smut']  # same as in your dataset
+class_names = ['Bacterial Leaf Blight', 'Brown Spot', 'Leaf Smut']
 
 # ------------------------------
 # 3. Streamlit UI
 # ------------------------------
-st.title("🌾 Rice Leaf Disease Classification")
-st.write("Upload an image of a rice leaf, and the model will predict its disease.")
+st.set_page_config(page_title="🌾 Rice Leaf Disease Classifier", layout="centered")
 
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+st.title("🌾 Rice Leaf Disease Classification")
+st.markdown("Upload a rice leaf image to predict its disease type using a **MobileNetV2** model.")
+
+uploaded_file = st.file_uploader("📸 Upload an image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Display uploaded image
-    st.image(uploaded_file, caption='Uploaded Leaf Image', use_column_width=True)
+    # Display image
+    image = Image.open(uploaded_file).convert('RGB')
+    st.image(image, caption="Uploaded Image", use_container_width=True)
 
     # Preprocess image
-    image = load_img(uploaded_file, target_size=(256, 256))
-    image_array = img_to_array(image) / 255.0
-    image_array = np.expand_dims(image_array, axis=0)
+    img_array = tf.keras.utils.img_to_array(image)
+    img_array = tf.image.resize(img_array, (256, 256))
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array = img_array / 255.0  # Normalize
 
-    # Make prediction
-    pred = model.predict(image_array)
-    pred_class = np.argmax(pred)
-    confidence = np.max(pred)
+    # Predict
+    predictions = model.predict(img_array)
+    predicted_class = class_names[np.argmax(predictions)]
+    confidence = np.max(predictions) * 100
 
     # Display result
-    st.success(f"Predicted Disease: {class_names[pred_class]}")
-    st.info(f"Confidence: {confidence*100:.2f}%")
+    st.success(f"✅ Predicted Disease: **{predicted_class}**")
+    st.write(f"**Confidence:** {confidence:.2f}%")
+
+    st.progress(int(confidence))
+
+st.caption("Model: MobileNetV2 | Framework: TensorFlow | Deployment: Streamlit Cloud")
