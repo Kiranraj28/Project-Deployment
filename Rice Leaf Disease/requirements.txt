@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+scikit-learn
+joblib
+pillow
+matplotlib
+h5py
+# Set the version below to match what you used in your model training!
+tensorflow==2.13.0
