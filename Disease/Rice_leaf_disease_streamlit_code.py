@@ -12,7 +12,8 @@ from PIL import Image
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("Disease/best_model.keras")
+    return keras.models.load_model("./Disease/best_model.keras")
+
 
 model = load_model()
 CLASS_NAMES = ['Bacterial leaf blight', 'Brown spot', 'Leaf smut'] # adjust names as per your classes
