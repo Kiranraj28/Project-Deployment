@@ -1,22 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-
+from pathlib import Path
 
 st.set_page_config(
     page_title="Rice Leaf Disease Detection Platform",
     page_icon="🌾",
     layout="centered"
 )
-
-
 
 st.sidebar.title("About This Project")
 st.sidebar.markdown("""
@@ -42,12 +34,9 @@ The confidence score expresses how certain the model is about its prediction, ra
 - The confidence score helps guide user trust and follow-up decisions when reviewing results.
 """)
 
-
-from pathlib import Path
-
 @st.cache_resource
 def load_model():
-    model_path = Path(__file__).parent / "best_model"
+    model_path = Path(__file__).parent / "best_model.keras"
     return tf.keras.models.load_model(str(model_path), compile=False)
 
 model = load_model()
@@ -66,4 +55,4 @@ if uploaded_file:
     result_idx = np.argmax(preds)
     st.success(f"Prediction: {CLASS_NAMES[result_idx]}")
     st.info(f"Confidence: {preds[0][result_idx]:.2f}")
-    
+
