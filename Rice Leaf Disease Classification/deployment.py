@@ -62,7 +62,8 @@ with st.sidebar:
 # ------------------------------
 @st.cache_resource
 def load_model():
-    model_path = os.path.join(os.path.dirname(__file__), "rice_leaf_classifier_clean.keras")
+    # The file is in the same directory as the executing script
+    model_path = "rice_leaf_classifier_clean.keras"
     model = tf.keras.models.load_model(model_path, compile=False)
     return model
 
