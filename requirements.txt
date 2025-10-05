@@ -4,5 +4,5 @@ numpy
 scikit-learn
 joblib
 pillow
-tensorflow-cpu
+tensorflow==2.13.0
 matplotlib
