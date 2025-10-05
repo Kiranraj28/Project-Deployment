@@ -2,65 +2,48 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import os
 
-st.set_page_config(
-    page_title="Rice Leaf Disease Detection Platform",
-    layout="centered"
-)
+st.set_page_config(page_title="Rice Leaf Disease Classification", layout="centered")
 
-st.sidebar.title("About This Project")
-st.sidebar.markdown(
-    """
-    **Rice Leaf Disease Classification**  
-    This project leverages deep learning to automate the identification of common rice leaf diseases from images.  
-    Using a CNN with MobileNetV2 as backbone and custom classification layers, the model distinguishes between Bacterial Leaf Blight, Brown Spot, and Leaf Smut.
+st.title("Rice Leaf Disease Classification")
+st.write("Upload an image of a rice leaf and the model will predict the disease class.")
 
-    **Key Features:**  
-    - Robust deep learning architecture  
-    - Real-time image analysis  
-    - Data augmentation for resilience  
-    - Practical application for agriculture  
-    """
-)
-st.sidebar.markdown(
-    """
-    **Understanding Confidence Score**  
-    The confidence score expresses how certain the model is about its prediction, ranging from 0 (no certainty) to 1 (maximum certainty).  
-    - Closer to 1: highly reliable  
-    - Moderate (0.5-0.7): more uncertainty  
-    - Use to guide trust/follow-up
-    """
-)
+# --- Debug: Show working directory and files to help with file path issues ---
+st.write("Working Directory:", os.getcwd())
+st.write("Files in working directory:", os.listdir())
 
+if "Rice Leaf Disease" in os.listdir():
+    st.write("Files in 'Rice Leaf Disease':", os.listdir("Rice Leaf Disease"))
+
+# --- Model Loading ---
 @st.cache_resource
-def load_model_file():
+def load_trained_model():
     model_path = "Rice Leaf Disease/best_model.h5"
+    st.write("Trying to load model from:", model_path)
     return tf.keras.models.load_model(model_path, compile=False)
 
-model = load_model_file()
+model = load_trained_model()
 
-# Adjust these names as per your trained classes
-CLASS_NAMES = ['Bacterial leaf blight', 'Brown spot', 'Leaf smut']
+# --- Class Names ---
+class_names = ['Bacterial leaf blight', 'Brown spot', 'Leaf smut']
 
-st.title("Rice Leaf Disease Prediction")
+# --- Image Upload ---
+uploaded_file = st.file_uploader("Upload a rice leaf image", type=['jpg', 'jpeg', 'png'])
 
-uploaded_file = st.file_uploader("Upload a rice leaf image (.jpg, .jpeg, .png)", type=['jpg', 'jpeg', 'png'])
-
-if uploaded_file:
+if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="Uploaded Image", use_column_width=True)
-
+    
     img_resized = image.resize((256, 256))
-    img_array = np.array(img_resized) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)  # (1, 256, 256, 3)
+    img_array = np.array(img_resized) / 255.0  # Normalize to [0, 1]
+    img_array = np.expand_dims(img_array, axis=0)  # To batch dimension
 
     preds = model.predict(img_array)
-    result_idx = np.argmax(preds)
-    confidence = preds[0][result_idx]
-
-    st.success(f"Prediction: {CLASS_NAMES[result_idx]}")
+    class_idx = np.argmax(preds)
+    confidence = np.max(preds)
+    
+    st.success(f"Prediction: {class_names[class_idx]}")
     st.info(f"Confidence: {confidence:.2f}")
-
 else:
-    st.info("Please upload an image file to classify.")
-
+    st.info("Please upload an image to get the prediction.")
