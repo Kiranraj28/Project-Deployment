@@ -6,4 +6,4 @@ joblib
 pillow
 matplotlib
 h5py
-tensorflow==2.13.0
+tensorflow
