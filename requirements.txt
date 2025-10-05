@@ -6,4 +6,5 @@ joblib
 pillow
 matplotlib
 h5py
-tensorflow-cpu
+tensorflow-cpu==2.19.0
+keras==3.10.0
