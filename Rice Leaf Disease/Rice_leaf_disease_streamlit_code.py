@@ -49,28 +49,10 @@ import streamlit as st
 @st.cache_resource
 def load_model():
     model_path = Path(__file__).parent / "best_model.h5"
-
-    if not model_path.exists():
-        st.error(f"❌ Model file not found at: {model_path}")
-        return None
-
     try:
-        # 🔹 rebuild architecture manually
-        base_model = tf.keras.applications.MobileNetV2(
-            input_shape=(224, 224, 3),
-            include_top=False,
-            weights=None
-        )
-        x = tf.keras.layers.GlobalAveragePooling2D()(base_model.output)
-        output = tf.keras.layers.Dense(3, activation='softmax')(x)  # 3 classes
-        model = tf.keras.models.Model(inputs=base_model.input, outputs=output)
-
-        # 🔹 load weights only
-        model.load_weights(str(model_path))
-
-        st.success("✅ Model loaded successfully")
+        model = tf.keras.models.load_model(str(model_path), compile=False)
+        st.success("✅ Model loaded successfully!")
         return model
-
     except Exception as e:
         st.error(f"⚠️ Error loading model: {e}")
         return None
