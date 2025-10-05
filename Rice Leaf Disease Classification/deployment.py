@@ -10,11 +10,7 @@ import numpy as np
 # ------------------------------
 # 1. Load Model
 # ------------------------------
-@st.cache_resource
-def load_model():
-    return tf.keras.models.load_model("rice_leaf_classifier_final.keras")
-
-model = load_model()
+model = tf.keras.models.load_model("Rice Leaf Disease Classification/rice_leaf_classifier_final.keras")
 
 # ------------------------------
 # 2. Class Names
