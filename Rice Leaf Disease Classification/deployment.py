@@ -8,6 +8,50 @@ import numpy as np
 from PIL import Image
 import os
 
+
+import streamlit as st
+
+# Sidebar section
+with st.sidebar:
+    st.title("🌾 Project Overview")
+
+    st.markdown("""
+    ### 🎯 **Objective**
+    Build a robust image classification model to accurately detect **Rice Leaf Diseases** 
+    from leaf images using **Deep Learning**.
+
+    ### 🧠 **Approach**
+    1. **Dataset Preparation**  
+       - Organized labeled images for each disease class.  
+       - Used `image_dataset_from_directory` for efficient loading.  
+       - Split into training, validation & test sets.
+
+    2. **Preprocessing**  
+       - Resized all images to **256×256**.  
+       - Applied pixel normalization using `Rescaling(1./255)`.
+
+    3. **Model Architecture**  
+       - Leveraged **MobileNetV2** (Transfer Learning).  
+       - Added custom Dense layers for classification.  
+       - Used **Softmax** activation for multi-class output.
+
+    4. **Training & Evaluation**  
+       - Monitored validation accuracy to prevent overfitting.  
+       - Evaluated using accuracy & loss metrics on test data.
+
+    ### 🏆 **Outcome**
+    The model achieved **high accuracy** in classifying:
+    - Bacterial Leaf Blight  
+    - Brown Spot  
+    - Leaf Smut  
+
+    Demonstrating the **power of deep learning** in **agricultural disease detection**.
+    """)
+
+    st.markdown("---")
+    st.markdown("📘 *Developed by [Kiran Raj T](https://github.com/Kiranraj28)*")
+
+
 # ------------------------------
 # 1. Load Model (cached)
 # ------------------------------
