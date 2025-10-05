@@ -44,11 +44,15 @@ The confidence score expresses how certain the model is about its prediction, ra
 
 
 from pathlib import Path
+import tensorflow as tf
+import streamlit as st
 
 @st.cache_resource
 def load_model():
-    model_path = Path(__file__).parent / "best_model"
+    # ✅ Point to your .h5 model file
+    model_path = Path(__file__).parent / "Rice Leaf Disease" / "best_model.h5"
     return tf.keras.models.load_model(str(model_path), compile=False)
+
 
 model = load_model()
 CLASS_NAMES = ['Bacterial leaf blight', 'Brown spot', 'Leaf smut'] # adjust names as per your classes
