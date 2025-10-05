@@ -42,23 +42,33 @@ The confidence score expresses how certain the model is about its prediction, ra
 - The confidence score helps guide user trust and follow-up decisions when reviewing results.
 """)
 
-
 from pathlib import Path
 import tensorflow as tf
 import streamlit as st
 
 @st.cache_resource
 def load_model():
-    # 👇 both files are in the same folder, so direct reference is enough
     model_path = Path(__file__).parent / "best_model.h5"
 
-    # optional check for debugging
     if not model_path.exists():
         st.error(f"❌ Model file not found at: {model_path}")
-    else:
-        st.success(f"✅ Model found at: {model_path}")
+        return None
 
-    return tf.keras.models.load_model(str(model_path), compile=False)
+    try:
+        model = tf.keras.models.load_model(
+            str(model_path),
+            compile=False,
+            custom_objects={
+                'KerasLayer': tf.keras.layers.Layer  # only needed if TF Hub was used
+            }
+        )
+        st.success("✅ Model loaded successfully")
+        return model
+
+    except Exception as e:
+        st.error(f"⚠️ Error loading model: {e}")
+        return None
+
 
 
 model = load_model()
