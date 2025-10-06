@@ -22,7 +22,7 @@ This app uses a deep learning model to classify rice leaf images into the follow
 # Load the trained model
 # ---------------------------
 import tensorflow as tf
-from keras.src.layers import TFSMLayer
+from keras.layers import TFSMLayer
 
 @st.cache_resource
 def load_dl_model():
