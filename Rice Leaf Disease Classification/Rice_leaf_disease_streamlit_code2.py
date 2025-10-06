@@ -26,8 +26,6 @@ from tensorflow.keras.models import load_model
 model = load_model("best_model1.keras")
 
 
-model = load_rice_model()
-
 # Define class names
 class_names = ['Bacterial Blight', 'Brown Spot', 'Leaf Blast']
 
