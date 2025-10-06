@@ -54,4 +54,3 @@ if uploaded_file is not None:
     st.write(f"### Predicted Disease: **{class_names[predicted_class]}**")
     st.write(f"Prediction Confidence: {predictions[0][predicted_class]*100:.2f}%")
 
-whole code is correct?
