@@ -76,9 +76,9 @@ st.sidebar.info("💡 Tip: Enter player attributes to predict which cluster (pla
 # -------------------------------
 # Load Pretrained Objects
 # -------------------------------
-scaler = joblib.load("scaler.pkl")
-pca = joblib.load("pca.pkl")
-model = joblib.load("kmeans.pkl")
+scaler = joblib.load("FIFA20-Player-Clustering/scaler.pkl")
+pca = joblib.load("FIFA20-Player-Clustering/pca.pkl")
+model = joblib.load("FIFA20-Player-Clustering/kmeans.pkl")
 
 # -------------------------------
 # Streamlit App Title
