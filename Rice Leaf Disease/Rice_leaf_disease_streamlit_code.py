@@ -21,12 +21,18 @@ This app uses a deep learning model to classify rice leaf images into the follow
 # ---------------------------
 # Load the trained model
 # ---------------------------
-@st.cache_resource
-def load_dl_model():
-    model = load_model("my_model.h5")  # Replace with your actual model path
-    return model
+import os
+from tensorflow.keras.models import load_model
 
-model = load_dl_model()
+# Get the directory of the current script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Build the full path to the model
+model_path = os.path.join(BASE_DIR, "rice_leaf_model.h5")  # adjust if inside a folder
+
+# Load the model
+model = load_model(model_path)
+
 
 # ---------------------------
 # Upload Image
