@@ -21,12 +21,12 @@ This app uses a deep learning model to classify rice leaf images into the follow
 # ---------------------------
 # Load the trained model
 # ---------------------------
-@st.cache_resource
-def load_dl_model():
-    model = load_model("best_model1.keras")  # Replace with your actual model path
-    return model
+# In Rice_leaf_disease_streamlit_code.py, line ~47
+MODEL_FOLDER = "Rice Leaf Disease/my_model.h5"
+# OR just "my_model.h5" if the script assumes the current directory.
 
-model = load_dl_model()
+# Then, load the model
+model = tf.keras.models.load_model(MODEL_FOLDER)
 
 # ---------------------------
 # Upload Image
