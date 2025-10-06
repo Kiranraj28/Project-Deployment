@@ -1,117 +1,111 @@
+# ==============================
+# 🌾 Rice Leaf Disease Prediction App
+# ==============================
+
 import streamlit as st
+import tensorflow as tf
 import numpy as np
 from PIL import Image
-import tensorflow as tf
-from tensorflow.keras.models import load_model
-import os
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
-# --- Configuration ---
-MODEL_PATH = 'rice_leaf_classifier_final.keras'
-IMAGE_SIZE = (224, 224) # Ensure this matches your model's input size
+# ------------------------------
+# Page Configuration
+# ------------------------------
+st.set_page_config(page_title="🌾 Rice Leaf Disease Classifier", layout="centered")
 
-# --- IMPORTANT: ADJUST THESE CLASS NAMES ---
-# Replace the placeholder class names with the EXACT 3 DISEASE LABELS your model predicts.
-CLASS_NAMES = [
-    'Bacterial Blight',
-    'Brown Spot',
-    'Leaf Smut' 
-    # NOTE: Only 3 class names are included, all representing a disease or status.
-]
+# ------------------------------
+# Sidebar Section
+# ------------------------------
+with st.sidebar:
+    st.title("🌾 Project Overview")
+    st.markdown("""
+    ### 🎯 **Objective**
+    Build a robust image classification model to accurately detect **Rice Leaf Diseases**  
+    from leaf images using **Deep Learning**.
 
-# --- Load Model ---
+    ### 🧠 **Approach**
+    1. **Dataset Preparation**
+       - Organized labeled images for each disease class.  
+       - Used `image_dataset_from_directory` for efficient loading.  
+       - Split into training, validation & test sets.
+
+    2. **Preprocessing**
+       - Resized all images to **256×256**.  
+       - Applied pixel normalization using `preprocess_input` (MobileNetV2 standard).
+
+    3. **Model Architecture**
+       - Leveraged **MobileNetV2** (Transfer Learning).  
+       - Added custom Dense layers for classification.  
+       - Used **Softmax** activation for multi-class output.
+
+    4. **Training & Evaluation**
+       - Monitored validation accuracy to prevent overfitting.  
+       - Evaluated using accuracy & loss metrics on test data.
+
+    ### 🏆 **Outcome**
+    The model achieved **high accuracy** in classifying:
+    - Bacterial Leaf Blight  
+    - Brown Spot  
+    - Leaf Smut  
+
+    Demonstrating the **power of deep learning** in **agricultural disease detection**.
+    """)
+
+    st.markdown("---")
+    st.markdown("📘 *Developed by [Kiran Raj T](https://github.com/Kiranraj28)*")
+
+# ------------------------------
+# 1. Load Model (cached)
+# ------------------------------
+model_path = "rice_leaf_classifier_clean.keras"
+
 @st.cache_resource
-def get_model():
-    """Loads the Keras model with error handling."""
-    try:
-        model = load_model(MODEL_PATH)
-        return model
-    except FileNotFoundError:
-        st.error(f"Error: Model file '{MODEL_PATH}' not found. "
-                 "Please ensure the Keras file is in the same directory.")
-        return None
-    except Exception as e:
-        st.error(f"An error occurred while loading the model: {e}")
-        return None
+def load_model():
+    model = tf.keras.models.load_model(model_path)
+    return model
 
-model = get_model()
+model = load_model()
 
-# --- Prediction Function ---
-def predict(image, model):
-    """
-    Preprocesses the image, makes a prediction, and returns the results.
-    """
-    # 1. Preprocess the image
-    img = image.resize(IMAGE_SIZE)
-    img_array = np.array(img)
-    
-    # Add batch dimension and normalize (assuming 0-1 normalization)
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array = img_array.astype('float32') / 255.0 
+# ------------------------------
+# 2. Class Names
+# ------------------------------
+class_names = ['Bacterial Leaf Blight', 'Brown Spot', 'Leaf Smut']
 
-    # 2. Make prediction
-    predictions = model.predict(img_array)
-    # Use softmax to get probabilities 
-    scores = tf.nn.softmax(predictions[0])
+# ------------------------------
+# 3. Preprocessing Function
+# ------------------------------
+def preprocess_image(image):
+    image = image.resize((256, 256))
+    image = tf.keras.preprocessing.image.img_to_array(image)
+    image = np.expand_dims(image, axis=0)
+    image = preprocess_input(image)
+    return image
 
-    # 3. Get the result
-    predicted_class_index = np.argmax(scores)
-    predicted_class_name = CLASS_NAMES[predicted_class_index]
-    confidence = np.max(scores) * 100
+# ------------------------------
+# 4. Streamlit UI
+# ------------------------------
+st.title("🌾 Rice Leaf Disease Classification")
+st.markdown("Upload a rice leaf image to predict its disease type using a **MobileNetV2** model.")
 
-    return predicted_class_name, confidence, scores
-
-# --- Streamlit App UI ---
-st.set_page_config(
-    page_title="Rice Leaf Disease Classifier",
-    page_icon="🌿",
-    layout="wide"
-)
-
-st.title("🚨 Rice Leaf Disease Classification (Disease Focus)")
-st.markdown(f"**This model predicts among {len(CLASS_NAMES)} disease categories:** {', '.join(CLASS_NAMES)}")
-
-if model is None:
-    st.stop()
-
-# File uploader widget
-uploaded_file = st.file_uploader(
-    "Choose a rice leaf image...", 
-    type=['jpg', 'jpeg', 'png']
-)
+uploaded_file = st.file_uploader("📸 Upload an image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Display the uploaded image
-    image = Image.open(uploaded_file)
-    
-    st.subheader("Uploaded Image")
-    st.image(image, caption='Image for Prediction', use_column_width=True)
+    image = Image.open(uploaded_file).convert('RGB')
+    st.image(image, caption="Uploaded Image", use_container_width=True)
 
-    # Prediction button
-    if st.button('Classify Disease'):
-        with st.spinner('Analyzing the image...'):
-            try:
-                # Get prediction
-                class_name, confidence, all_scores = predict(image, model)
+    img_array = preprocess_image(image)
 
-                st.subheader("Prediction Result")
-                
-                st.error(f"Prediction: **{class_name}** 🚨") # Highlight as it's a disease prediction
-                    
-                st.info(f"Confidence: **{confidence:.2f}%**")
+    with st.spinner("🔍 Analyzing image..."):
+        predictions = model.predict(img_array)
 
-                # Optional: Show all class probabilities
-                st.markdown("---")
-                st.subheader("Detailed Probabilities")
-                
-                results_dict = {
-                    "Disease/Status": CLASS_NAMES,
-                    "Probability (%)": [f"{s * 100:.2f}" for s in all_scores.numpy()]
-                }
-                st.dataframe(results_dict)
-                
-            except Exception as e:
-                st.error(f"An error occurred during prediction: {e}")
-                
-# --- Footer ---
-st.markdown("---")
-st.markdown("Application powered by a Keras CNN Model and Streamlit.")
+    predicted_class = class_names[np.argmax(predictions)]
+    confidence = np.max(predictions) * 100
+
+    st.success(f"✅ Predicted Disease: **{predicted_class}**")
+    st.write(f"**Confidence:** {confidence:.2f}%")
+    st.progress(int(confidence))
+
+# ------------------------------
+# Footer
+# ------------------------------
+st.caption("Model: MobileNetV2 | Framework: TensorFlow | Deployment: Streamlit Cloud")
