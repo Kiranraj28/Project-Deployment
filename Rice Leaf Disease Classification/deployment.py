@@ -60,30 +60,8 @@ with st.sidebar:
 # ------------------------------
 # 1. Load Model (cached)
 # ------------------------------
-import os
-import tensorflow as tf
-# import streamlit as st # Assuming you are using Streamlit based on the original code snippet
 
-# @st.cache_resource # Uncomment this if you are using Streamlit
-def load_model():
-    # 1. Get the absolute path to the directory containing the current script.
-    #    This should be '/path/to/Project-Deployment/Rice Leaf Disease Classification'
-    script_dir = os.path.dirname(os.path.abspath(__file__)) 
-    
-    # 2. Join the script directory with the model file name.
-    #    This results in: '/path/to/.../Rice Leaf Disease Classification/rice_leaf_classifier_clean.keras'
-    model_path = os.path.join(script_dir, "rice_leaf_classifier_clean.keras")
-    
-    # Optional: Print the resolved path to verify it is correct
-    print(f"Attempting to load model from: {model_path}")
-
-    # 3. Load the model
-    # Note: tf.keras.models.load_model will raise the ValueError if the path is bad
-    model = tf.keras.models.load_model(model_path, compile=False) 
-    
-    return model
-
-model = load_model() # Uncomment this to test
+model_path = "Rice Leaf Disease Classification/rice_leaf_classifier_clean.keras"
 
 # ------------------------------
 # 2. Class Names (same order as training)
