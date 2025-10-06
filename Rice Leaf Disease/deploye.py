@@ -21,12 +21,26 @@ This app uses a deep learning model to classify rice leaf images into the follow
 # ---------------------------
 # Load the trained model
 # ---------------------------
-# In Rice_leaf_disease_streamlit_code.py, line ~47
-MODEL_FOLDER = "Rice Leaf Disease/my_model.h5"
-# OR just "my_model.h5" if the script assumes the current directory.
+import tensorflow as tf
+from keras.src.layers import TFSMLayer
 
-# Then, load the model
-model = tf.keras.models.load_model(MODEL_FOLDER)
+@st.cache_resource
+def load_dl_model():
+    # 1. Define the path to the SavedModel directory
+    SAVEDMODEL_DIR = "rice_leaf_model" 
+    
+    # 2. Wrap the SavedModel as a layer for Keras 3
+    # Use 'serving_default' as the call_endpoint (most common)
+    model = tf.keras.Sequential([
+        TFSMLayer(SAVEDMODEL_DIR, call_endpoint='serving_default')
+    ])
+    
+    # You will then need to compile or build this sequential model before use.
+    # model.build(input_shape=(None, 224, 224, 3)) 
+    
+    return model
+
+# The rest of your code then uses this 'model' object
 
 # ---------------------------
 # Upload Image
