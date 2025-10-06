@@ -27,8 +27,9 @@ from tensorflow.keras.models import load_model
 # Get the directory of the current script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Build the full path to the model
-model_path = os.path.join(BASE_DIR, "rice_leaf_model.h5")  # adjust if inside a folder
+# Build the full path to the modelmodel_path = os.path.join(BASE_DIR, "Rice Leaf Disease", "rice_leaf_model.h5")
+model_path = os.path.join(BASE_DIR, "Rice Leaf Disease", "rice_leaf_model.h5")
+
 
 # Load the model
 model = load_model(model_path)
