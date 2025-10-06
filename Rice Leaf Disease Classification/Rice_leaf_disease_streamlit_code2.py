@@ -21,10 +21,10 @@ st.write("Upload an image of a rice leaf, and the model will predict the disease
 # ---------------------------
 # 2. Load the trained model
 # ---------------------------
-@st.cache_resource(show_spinner=True)
-def load_rice_model():
-    model = load_model("Rice Leaf Disease Classification/best_model1.keras")
-    return model
+from tensorflow.keras.models import load_model
+
+model = load_model("best_model1.keras")
+
 
 model = load_rice_model()
 
