@@ -23,7 +23,7 @@ This app uses a deep learning model to classify rice leaf images into the follow
 # ---------------------------
 import tensorflow as tf
 
-model_path = 'my_model.h5'
+model_path = 'best_model1.keras'
 model = tf.keras.models.load_model(model_path)
 
 # ---------------------------
