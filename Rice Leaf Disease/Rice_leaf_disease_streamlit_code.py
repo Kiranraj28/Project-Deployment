@@ -21,7 +21,7 @@ This app classifies rice leaf images into the following disease categories:
 
 import tensorflow as tf
 
-model_path = 'Rice Leaf Disease/my_model.h5'
+model_path = 'Rice Leaf Disease/best_model1.Keras'
 model = tf.keras.models.load_model(model_path)
 # ---------------------------
 # Upload Image
