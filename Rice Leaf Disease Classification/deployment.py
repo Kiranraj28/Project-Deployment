@@ -57,7 +57,7 @@ with st.sidebar:
 # ------------------------------
 # 1. Load Model (cached)
 # ------------------------------
-model_path = "rice_leaf_classifier_clean2.keras"
+model_path = "rice_leaf_classifier_clean.keras"
 
 @st.cache_resource
 def load_model():
