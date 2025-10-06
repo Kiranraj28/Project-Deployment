@@ -2,6 +2,7 @@
 
 import streamlit as st
 import tensorflow as tf
+from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
 from PIL import Image
@@ -20,31 +21,10 @@ This app uses a deep learning model to classify rice leaf images into the follow
 # ---------------------------
 # Load the trained model
 # ---------------------------
-try:
-    from keras.layers.experimental import TFSMLayer
-except ImportError:
-    st.error("TFSMLayer not found. Make sure you are using Keras 3.")
-    st.stop()
+import tensorflow as tf
 
-@st.cache_resource
-def load_dl_model():
-    SAVEDMODEL_DIR = "rice_leaf_model"
-    try:
-        # Wrap the SavedModel for Keras 3
-        model = tf.keras.Sequential([
-            TFSMLayer(SAVEDMODEL_DIR, call_endpoint='serving_default')
-        ])
-        # Build the model with the correct input shape
-        model.build(input_shape=(None, 224, 224, 3))
-        return model
-    except Exception as e:
-        st.error(f"Failed to load model: {e}")
-        st.stop()
-
-# Show spinner while loading model
-with st.spinner("Loading model..."):
-    model = load_dl_model()
-st.success("Model loaded successfully!")
+model_path = 'my_model.h5'
+model = tf.keras.models.load_model(model_path)
 
 # ---------------------------
 # Upload Image
@@ -56,25 +36,22 @@ if uploaded_file is not None:
     img = Image.open(uploaded_file)
     st.image(img, caption="Uploaded Image", use_container_width=True)
 
+
     # Preprocess the image
-    img = img.resize((224, 224))  # match model input
+    img = img.resize((256, 256))
     img_array = image.img_to_array(img)
-    img_array = img_array / 255.0  # normalize to [0,1]
-    img_array = np.expand_dims(img_array, axis=0)  # Shape: (1, 224, 224, 3)
+    img_array = img_array / 255.0
+    img_array = np.expand_dims(img_array, axis=0)  # Shape: (1, 256, 256, 3)
 
-    # ---------------------------
-    # Make Prediction
-    # ---------------------------
-    with st.spinner("Predicting..."):
-        predictions = model.predict(img_array)
+    # Make prediction
+    predictions = model.predict(img_array)
+    predicted_class = np.argmax(predictions, axis=1)[0]
 
-    # Ensure predictions shape is correct
-    if predictions.shape[1] != 3:
-        st.error(f"Unexpected model output shape: {predictions.shape}")
-    else:
-        predicted_class_idx = np.argmax(predictions, axis=1)[0]
-        class_names = ["Bacterial Leaf Blight", "Brown Spot", "Leaf Smut"]
+    # Map the predicted index to class name
+    class_names = ["Bacterial Leaf Blight", "Brown Spot", "Leaf Smut"]
 
-        # Display the prediction
-        st.write(f"### Predicted Disease: **{class_names[predicted_class_idx]}**")
-        st.write(f"Prediction Confidence: {predictions[0][predicted_class_idx]*100:.2f}%")
+    # Display the prediction
+    st.write(f"### Predicted Disease: **{class_names[predicted_class]}**")
+    st.write(f"Prediction Confidence: {predictions[0][predicted_class]*100:.2f}%")
+
+whole code is correct?
