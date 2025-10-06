@@ -28,7 +28,7 @@ MODEL_FOLDER = "rice_leaf_model"
 if not os.path.exists(MODEL_FOLDER):
     if not os.path.exists(MODEL_ZIP):
         # Replace with your raw GitHub URL of the zip file
-        ZIP_URL = "https://raw.githubusercontent.com/<USERNAME>/<REPO>/main/rice_leaf_model.zip"
+        ZIP_URL = "https://github.com/Kiranraj28/Project-Deployment/blob/main/Rice%20Leaf%20Disease/rice_leaf_model.zip"
         st.info("Downloading model...")
         r = requests.get(ZIP_URL)
         with open(MODEL_ZIP, "wb") as f:
