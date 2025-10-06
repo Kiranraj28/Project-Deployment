@@ -24,7 +24,8 @@ This app uses a deep learning model to classify rice leaf images into the follow
 import tensorflow as tf
 
 model_path = 'Rice Leaf Disease/my_model.h5'
-model = tf.keras.models.load_model(model_path)
+model = tf.keras.models.load_model(model_path, compile=False)  # compile=False can help if custom objects exist
+
 
 # ---------------------------
 # Upload Image
