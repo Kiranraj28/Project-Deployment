@@ -19,36 +19,10 @@ This app classifies rice leaf images into the following disease categories:
 - Leaf Smut
 """)
 
-# ---------------------------
-# Download and extract model zip from Git (if not present)
-# ---------------------------
-MODEL_ZIP = "Rice Leaf Disease/rice_leaf_model.zip"
-MODEL_FOLDER = "Rice Leaf Disease/rice_leaf_model"
+import tensorflow as tf
 
-if not os.path.exists(MODEL_FOLDER):
-    if not os.path.exists(MODEL_ZIP):
-        # Replace with your raw GitHub URL of the zip file
-        ZIP_URL = "https://github.com/Kiranraj28/Project-Deployment/blob/main/Rice%20Leaf%20Disease/rice_leaf_model.zip"
-        st.info("Downloading model...")
-        r = requests.get(ZIP_URL)
-        with open(MODEL_ZIP, "wb") as f:
-            f.write(r.content)
-
-    # Extract the zip
-    with zipfile.ZipFile(MODEL_ZIP, 'r') as zip_ref:
-        zip_ref.extractall(MODEL_FOLDER)
-        st.success("Model extracted successfully!")
-
-# ---------------------------
-# Load the model
-# ---------------------------
-@st.cache_resource
-def load_dl_model():
-    model = tf.keras.models.load_model(MODEL_FOLDER)
-    return model
-
-model = load_dl_model()
-
+model_path = 'Rice Leaf Disease/best_model1.keras'
+model = tf.keras.models.load_model(model_path)
 # ---------------------------
 # Upload Image
 # ---------------------------
