@@ -22,8 +22,8 @@ This app classifies rice leaf images into the following disease categories:
 # ---------------------------
 # Download and extract model zip from Git (if not present)
 # ---------------------------
-MODEL_ZIP = "rice_leaf_model.zip"
-MODEL_FOLDER = "rice_leaf_model"
+MODEL_ZIP = "Rice Leaf Disease/rice_leaf_model.zip"
+MODEL_FOLDER = "Rice Leaf Disease/rice_leaf_model"
 
 if not os.path.exists(MODEL_FOLDER):
     if not os.path.exists(MODEL_ZIP):
