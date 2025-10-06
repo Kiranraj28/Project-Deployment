@@ -23,7 +23,7 @@ st.write("Upload an image of a rice leaf, and the model will predict the disease
 # ---------------------------
 from tensorflow.keras.models import load_model
 
-model = load_model("best_model1.keras")
+model = load_model("Rice Leaf Disease Classification/best_model1.keras")
 
 
 # Define class names
