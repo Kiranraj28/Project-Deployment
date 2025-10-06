@@ -57,14 +57,23 @@ with st.sidebar:
 # ------------------------------
 # 1. Load Model (cached)
 # ------------------------------
-model_path = "rice_leaf_classifier_clean.keras"
+import os
+import tensorflow as tf
+import streamlit as st
+
+model_path = "Rice Leaf Disease Classification/rice_leaf_classifier_clean.keras"
 
 @st.cache_resource
 def load_model():
+    if not os.path.exists(model_path):
+        st.error(f"❌ Model file not found at: {model_path}")
+        st.stop()
     model = tf.keras.models.load_model(model_path)
     return model
 
 model = load_model()
+st.success("✅ Model loaded successfully!")
+
 
 # ------------------------------
 # 2. Class Names
