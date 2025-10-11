@@ -55,7 +55,7 @@ Similar structure follows for each featured project.
 ## 🏆 About Me
 Hello! I’m Kiran Raj T, a dedicated Data Scientist with experience in ML, DL, NLP, and deploying intelligent applications. Proficient with Python, SQL, Pandas, TensorFlow, PyTorch, Docker, and Streamlit. My projects bridge technical excellence and real-world business needs, empowering organizations to harness AI for better outcomes.[1]
 
-Connect: [LinkedIn](https://www.linkedin.com/) | [Portfolio](https://kiranrajportfolio.netlify.app/)
+Connect: ### 📧 [Email](mailto:kiranraj0660@gmail.com) | 🌐 [LinkedIn](https://www.linkedin.com/in/kiran-raj-b1b724345) | 🐙 [GitHub](https://github.com/Kiranraj28) | 📊 [Portfolio](https://kiranrajportfolio.netlify.app) | 📈 [Kaggle](https://www.kaggle.com/kiranrajt)
 
 ## ✨ Professional Impact
 Each repository here is a testament to real-world impact achieved by combining rigorous model development with practical deployment. The focus is not only accuracy, but production-grade usability and scalability for diverse business challenges.[1]
