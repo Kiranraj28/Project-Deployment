@@ -1,147 +1,66 @@
 # 🚀 Data Science & ML Deployment Portfolio
 
 ## 📌 Summary
-
-This repository showcases **end-to-end machine learning and deep learning projects** with a strong focus on **deployment and real-world impact**. Each project demonstrates hands-on expertise in **ML pipelines, data processing, model building, and deployment** using **Streamlit Cloud, Docker, and AWS**.
-
-These works reflect practical experience in developing **scalable, production-ready solutions** that generate actionable insights, optimize performance, and drive business decision-making.
-
----
+This repository showcases robust, end-to-end machine learning and deep learning solutions with a strong focus on deployment and real-world impact. These projects demonstrate hands-on expertise in building ML pipelines, deploying interactive web apps using Streamlit, and solving business problems through predictive analytics, clustering, classification, and time-series forecasting. The work reflects practical experience in developing scalable solutions that drive actionable insights and inform decision-making.[1]
 
 ## 🧠 Featured Projects
 
-### 1️⃣ [Walk vs Run Activity Prediction](https://walk-run.streamlit.app/) *(Streamlit Cloud)*
+### 1. Walk vs Run Activity Prediction (Streamlit Cloud)
+Predicts human activity (walking vs running) using sensor data, deployed as an interactive web app via Streamlit Cloud. Achieved 94% classification accuracy with SVM and 92% with Random Forest. Full ML pipeline serialization for reusable deployments.[1]
 
-* Predicts human activity (walking vs running) using motion sensor data.
-* Achieved **94% accuracy (SVM)** and **92% (Random Forest)**.
-* Built and deployed on **Streamlit Cloud** with complete ML pipeline serialization for reusable deployment.
+### 2. Rice Leaf Disease Classification
+Delivered 95.8% image classification accuracy using MobileNetV2 and data augmentation techniques. Built a deep learning pipeline for early crop disease diagnosis, supporting sustainable agriculture. Utilizes Python, TensorFlow, Keras, and scikit-learn for scalable model building.[1]
 
----
+### 3. Employee Performance Prediction
+Developed a Random Forest-based classifier for employee performance, attaining 97.32% test accuracy. Project features advanced feature engineering, hyperparameter tuning, and interpretable results to help HR teams streamline workforce assessments.[1]
 
-### 2️⃣ [Rice Leaf Disease Classification](https://drive.google.com/file/d/1I5St9i68gTXYDXHcNoXRpgMfxc-MuMKx/view)
+### 4. FIFA20 Player Clustering
+Clustered professional football players based on traits and skills in FIFA20 using DBSCAN (Unsupervised Learning). Achieved Silhouette Score of 0.67. Results support talent scouting and team building with strong Python and visualization toolkit usage.[1]
 
-* Achieved **95.8% image classification accuracy** using **MobileNetV2** and **data augmentation**.
-* Built a scalable DL pipeline for **early crop disease detection** using **TensorFlow, Keras, and scikit-learn**.
-* Supports sustainable agriculture through AI-driven diagnostics.
+### 5. Credit Risk Prediction (Banking Domain)
+Created ensemble learning models to assess customer credit card default risk, improving risk segmentation with custom feature engineering. Achieved a Gini score of 37.9 for effective data-driven lending decisions.[1]
 
----
-
-### 3️⃣ [Employee Performance Prediction](https://employe-performances.streamlit.app/)
-
-* Developed a **Random Forest Classifier** with **97.32% test accuracy**.
-* Enhanced interpretability through feature importance visualization.
-* Helped HR teams streamline workforce evaluation using predictive analytics.
-
----
-
-### 4️⃣ [FIFA20 Player Clustering](https://fifa20-clustering.streamlit.app/)
-
-* Clustered players using **DBSCAN**, achieving a **Silhouette Score of 0.67**.
-* Reduced manual scouting effort by **60%** and improved team-building efficiency.
-* Leveraged **Python, Pandas, and Seaborn** for robust data visualization and analysis.
-
----
-
-### 5️⃣ [Credit Risk Prediction (Banking Domain)](https://drive.google.com/file/d/1IuUaDM3J7sOEE_yzKfXy2LJ3K3-hnN66/view)
-
-* Built an **ensemble model** to assess credit card default risk.
-* Achieved a **Gini score of 37.9 (+22% vs baseline)** through feature engineering.
-* Improved risk segmentation accuracy by **25%**, enabling data-driven lending decisions.
-
----
-
-### 6️⃣ [COVID-19 Time Series Forecasting (SARIMA)](https://drive.google.com/file/d/1oCMLxb7OBzksOAYXhHje6gijIMmTm_8O/view)
-
-* Modeled daily COVID-19 cases in India using **SARIMA/SARIMAX**, achieving an **R² score of 0.92** and **8.5% MAPE**.
-* Provided predictive insights for **healthcare resource planning and forecasting**.
-
----
+### 6. COVID-19 Time Series Forecasting (SARIMA)
+Forecasted daily COVID-19 cases in India with an 8.5% Mean Absolute Percentage Error (MAPE), enabling predictive insights for resource allocation and healthcare preparedness.[1]
 
 ## 📂 Repository Structure
-
 ```
 project-deployment/
 │── Streamlit_deployement.py      # Main Streamlit app
-│── dep_pipeline.pkl              # Serialized ML pipeline
+│── dep_pipeline.pkl              # Serialized pipeline (scaler + model)
 │── requirements.txt              # App dependencies
 │── README.md                     # Project documentation
 ```
-
-*(Each project follows a similar folder structure for clarity and reproducibility.)*
-
----
+Similar structure follows for each featured project.
 
 ## ⚙️ Tech Stack
-
-**Languages & Frameworks:** Python, TensorFlow, Keras, Scikit-learn, NumPy, Pandas
-**Algorithms:** SVM, Random Forest, DBSCAN, SARIMA, MobileNetV2
-**Visualization:** Seaborn, Matplotlib, Power BI, Tableau
-**Data Management:** SQL, MongoDB
-**Deployment:** Streamlit Cloud, Docker, AWS (EC2, S3, IAM)
-**Version Control:** Git & GitHub
-
----
+- Python 3.9+
+- Streamlit, TensorFlow, Keras, scikit-learn, NumPy, Pandas
+- DBSCAN, SVM, Random Forest, SARIMA, MobileNetV2
+- Power BI, Tableau (for visualization)
+- SQL, MongoDB (for data management)
+- Docker (for scalable deployments)
+- Git & GitHub (for version control and collaboration)[1]
 
 ## 🚀 Deployment
-
-* All web apps are deployed on **Streamlit Cloud** for live, interactive ML predictions.
-* **Containerized using Docker** for scalable, portable, and production-ready deployment.
-* Future-ready architecture supporting **AWS cloud scaling**.
-
----
+- Apps deployed on Streamlit Cloud for live ML predictions.
+- Containerization and cloud deployment using Docker supported for scalable solutions.[1]
 
 ## 📊 Future Improvements
+- Multi-class expansion (for activity, diseases, etc.)
+- Integration with IoT sensors and real-time data
+- Advanced dashboarding and visualization
+- Kubernetes-based scalable deployments[1]
 
-* Expand to **multi-class and real-time prediction** use cases.
-* Integrate with **IoT sensor streams** and live dashboards.
-* Implement **Kubernetes orchestration** for large-scale deployments.
-* Enhance explainability using **SHAP / LIME** models.
+## 🏆 About Me
+Hello! I’m Kiran Raj T, a dedicated Data Scientist with experience in ML, DL, NLP, and deploying intelligent applications. Proficient with Python, SQL, Pandas, TensorFlow, PyTorch, Docker, and Streamlit. My projects bridge technical excellence and real-world business needs, empowering organizations to harness AI for better outcomes.[1]
 
----
+Connect: [LinkedIn](https://www.linkedin.com/) | [Portfolio](https://kiranrajportfolio.netlify.app/)
 
-## 🧠 About Me
+## ✨ Professional Impact
+Each repository here is a testament to real-world impact achieved by combining rigorous model development with practical deployment. The focus is not only accuracy, but production-grade usability and scalability for diverse business challenges.[1]
 
-Hi, I’m **Kiran Raj T**, a **Certified Data Scientist (IABAC, DataMites, NASSCOM)** with expertise in **Machine Learning, Deep Learning, NLP, and Time Series Forecasting**.
-I specialize in designing and deploying **intelligent, scalable, and interpretable models** using modern data science tools and cloud platforms.
-
-My projects bridge **technical excellence** with **business impact**, helping organizations make smarter, data-driven decisions.
-
----
-
-## 🏆 Certifications
-
-* Certified Data Scientist – **IABAC (International Association of Business Analytics Certification)**
-* Certified Data Scientist – **DataMites Global Institute**
-* Certified Data Scientist – **NASSCOM**
-
----
-
-## 📬 [Get in Touch](mailto:kiranraj0660@gmail.com)
-
-### 📧 [Email](mailto:kiranraj0660@gmail.com)
-
-**[kiranraj0660@gmail.com](mailto:kiranraj0660@gmail.com)**
-
-### 🌐 [LinkedIn](https://www.linkedin.com/in/kiran-raj-b1b724345)
-
-**linkedin.com/in/kiran-raj-b1b724345**
-
-### 🐙 [GitHub](https://github.com/Kiranraj28)
-
-**github.com/Kiranraj28**
-
-### 📊 [Portfolio](https://kiranrajportfolio.netlify.app)
-
-**kiranrajportfolio.netlify.app**
-
-### 📈 [Kaggle](https://www.kaggle.com/kiranrajt)
-
-**kaggle.com/kiranrajt**
-
----
-
-> “Turning data into decisions — one project at a time.”
+***
 
 
-
-
+[1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/collection_c780345a-1197-4938-898d-6a2007b4f382/8f2a6e19-0b41-4868-8557-b5daf95ecc59/Kiran_raj_final_resume_1.pdf)
